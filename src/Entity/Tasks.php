@@ -31,6 +31,9 @@ class Tasks
     #[ORM\Column]
     private ?bool $isComplete = null;
 
+    #[ORM\Column]
+    private ?int $userId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +95,18 @@ class Tasks
     public function setIsComplete(bool $isComplete): static
     {
         $this->isComplete = $isComplete;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): static
+    {
+        $this->userId = $userId;
 
         return $this;
     }
