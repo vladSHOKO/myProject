@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
-class Users
+class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
