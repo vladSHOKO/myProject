@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['user:read']],
+    denormalizationContext: ['groups' => ['user:create', 'user:update', 'user:delete']],
+)]
 class User
 {
     #[ORM\Id]
@@ -16,9 +20,11 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:delete'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:delete'])]
     private ?string $surname = null;
 
     public function getId(): ?int
