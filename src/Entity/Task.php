@@ -17,7 +17,7 @@ use ApiPlatform\Metadata\Get;
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['task:read']],
-    denormalizationContext: ['groups' => ['task:create', 'task:update']],
+    denormalizationContext: ['groups' => ['task:create', 'task:update', 'task:delete']],
 
 )]
 class Task
@@ -28,18 +28,23 @@ class Task
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['task:read'])]
     private ?\DateTimeInterface $dateOfCreation = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
     private ?\DateTimeInterface $dateOfCompleting = null;
 
     #[ORM\Column]
+    #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
     private ?bool $isComplete = null;
 
     #[ORM\Column]
