@@ -14,15 +14,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['user:read']],
-    denormalizationContext: ['groups' => ['user:create', 'user:update', 'user:delete']],
     operations: [
         new GetCollection(),
         new Get(),
         new Post(),
         new Put(),
         new Delete(),
-    ]
+    ],
+    normalizationContext: ['groups' => ['user:read']],
+    denormalizationContext: ['groups' => ['user:create', 'user:update', 'user:delete']],
 )]
 class User
 {

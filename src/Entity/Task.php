@@ -16,15 +16,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['task:read']],
-    denormalizationContext: ['groups' => ['task:create', 'task:update', 'task:delete']],
     operations: [
         new GetCollection(),
         new Get(),
         new Post(),
         new Put(),
         new Delete(),
-    ]
+    ],
+    normalizationContext: ['groups' => ['task:read']],
+    denormalizationContext: ['groups' => ['task:create', 'task:update', 'task:delete']],
+    paginationItemsPerPage: 10
 
 )]
 class Task
