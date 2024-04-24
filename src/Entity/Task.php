@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Odm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -37,6 +40,7 @@ class Task
 
     #[ORM\Column(length: 255)]
     #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
+    #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -53,6 +57,7 @@ class Task
 
     #[ORM\Column]
     #[Groups(['task:read', 'task:create', 'task:update', 'task:delete'])]
+    #[ApiFilter(\ApiPlatform\Doctrine\Orm\Filter\BooleanFilter::class)]
     private ?bool $isComplete = null;
 
     #[ORM\Column]
